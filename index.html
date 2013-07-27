@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="todo">
+<head>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/filter.js"></script>
+	<script type="text/javascript" src="js/todo.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>Angularjs TO DO</title>
+</head>
+<body>
+
+	<input type="text" ng-model="name">
+	<h1>Hello {{name}}</h1>
+	
+	<h1>My To Do List</h1>
+	<div ng-controller="TodoCtrl">
+		<h2>{{remaining()}} of {{todos.length}} remaining  <a href="" ng-click="archive()">archive</a></h2> 
+		<p>Search todo:<input type="text" ng-model="query"></p>
+		<p>Order todo:
+		 <select ng-model="orderPro">
+		 	<option value="cost">Cost</option>
+		 	<option value="done">Done</option>
+		 	<option value="text">Name</option>
+		</select> </p>
+		
+		<span>{{query}}</span>
+		<ul>
+			<li ng-repeat="todo in todos | filter:query | orderBy: orderPro">
+				<input type="checkbox" ng-model="todo.done">
+				<span class="todo-{{todo.done}}">{{todo.text}}</span>
+				<span> {{todo.cost}} days</span>
+				<span> {{todo.done | checkdone }}</span>
+			</li>
+		</ul>
+		<form ng-submit="addTodo()">
+			<input type="text" ng-model="todoText" placeholder="add todo here">
+			<input type="number" ng-model="todoCost" placeholder="how many days you will take to finish it">
+			<input type="submit" value="Add">
+		</form>
+		
+	</div>
+
+</body>
+</html>

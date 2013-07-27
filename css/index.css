@@ -1,0 +1,7 @@
+.todo-true {
+	text-decoration: line-through;
+}
+ul {
+	margin:0;
+	list-style: none;
+}
